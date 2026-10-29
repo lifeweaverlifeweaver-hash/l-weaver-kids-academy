@@ -6,11 +6,11 @@
     <title>L-Weaver Kids Academy</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #F7F9FC;
             color: #2F2E41;
             margin: 0;
-            padding: 15px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -19,69 +19,86 @@
             width: 100%;
             max-width: 600px;
             background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
+            padding: 18px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            box-sizing: border-box;
         }
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 12px;
             margin-bottom: 15px;
         }
         .score {
             background: #FFE66D;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
             font-weight: bold;
+            font-size: 16px;
+        }
+        .mascot-box {
+            background: #E8F7F5;
+            border-left: 5px solid #4ECDC4;
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .nav button {
+            padding: 10px 5px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            background: #f8f9fa;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .nav button.active {
+            background: #FF6B6B;
+            color: white;
+            border-color: #FF6B6B;
         }
         .btn {
             background: #4ECDC4;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 12px;
             font-size: 16px;
             border-radius: 10px;
             cursor: pointer;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 12px;
             font-weight: bold;
         }
         .btn-math { background: #FF6B6B; }
-        input {
+        .btn-nature { background: #2ECC71; }
+        .btn-story { background: #9B59B6; }
+        input, select {
             width: 100%;
             padding: 10px;
-            font-size: 16px;
+            font-size: 15px;
             border: 2px solid #ddd;
             border-radius: 8px;
-            margin-top: 10px;
+            margin-top: 8px;
             box-sizing: border-box;
         }
         .module { display: none; }
         .module.active { display: block; }
-        .nav {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .nav button {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 8px;
-            background: #eee;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .nav button.active {
-            background: #2F2E41;
-            color: white;
-        }
         .feedback {
-            margin-top: 10px;
+            margin-top: 12px;
             padding: 10px;
             border-radius: 8px;
             font-weight: bold;
@@ -89,91 +106,6 @@
         }
         .correct { background: #D4EDDA; color: #155724; display: block; }
         .wrong { background: #F8D7DA; color: #721C24; display: block; }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <div class="header">
-            <div>
-                <h2 style="margin:0; color:#FF6B6B;">🎓 L-Weaver Kids</h2>
-                <small style="color:#777;">Академия за 1–4 клас</small>
-            </div>
-            <div class="score">⭐ <span id="stars">0</span></div>
-        </div>
-
-        <div class="nav">
-            <button class="active" onclick="showTab('math', this)">🔢 Математика</button>
-            <button onclick="showTab('bg', this)">📖 Български</button>
-        </div>
-
-        <!-- Математика -->
-        <div id="math" class="module active">
-            <h3>Космическо Събиране</h3>
-            <p id="math-q" style="font-size: 18px; font-weight: bold;">3 + 4 = ?</p>
-            <input type="number" id="math-ans" placeholder="Въведи отговор...">
-            <button class="btn btn-math" onclick="checkMath()">Провери ✨</button>
-            <div id="math-fb" class="feedback"></div>
-        </div>
-
-        <!-- Български -->
-        <div id="bg" class="module">
-            <h3>Детектив на Думите</h3>
-            <p style="font-size: 16px;">Поправи грешната дума: <strong style="color:#FF6B6B;">Шокулад</strong></p>
-            <input type="text" id="bg-ans" placeholder="Напиши правилно...">
-            <button class="btn" onclick="checkBg()">Провери ✏️</button>
-            <div id="bg-fb" class="feedback"></div>
-        </div>
-    </div>
-
-    <script>
-        let score = 0;
-        let currentSum = 7;
-
-        function showTab(tabId, btn) {
-            document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
-            document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        function checkMath() {
-            let val = parseInt(document.getElementById('math-ans').value);
-            let fb = document.getElementById('math-fb');
-            if (val === currentSum) {
-                fb.className = "feedback correct";
-                fb.innerText = "Браво! +1 ⭐";
-                score++;
-                document.getElementById('stars').innerText = score;
-                setTimeout(newMath, 1500);
-            } else {
-                fb.className = "feedback wrong";
-                fb.innerText = "Опитай пак!";
-            }
-        }
-
-        function newMath() {
-            let a = Math.floor(Math.random() * 5) + 1;
-            let b = Math.floor(Math.random() * 5) + 1;
-            currentSum = a + b;
-            document.getElementById('math-q').innerText = `${a} + ${b} = ?`;
-            document.getElementById('math-ans').value = "";
-            document.getElementById('math-fb').style.display = "none";
-        }
-
-        function checkBg() {
-            let val = document.getElementById('bg-ans').value.trim().toLowerCase();
-            let fb = document.getElementById('bg-fb');
-            if (val === "шоколад") {
-                fb.className = "feedback correct";
-                fb.innerText = "Супер! +1 ⭐";
-                score++;
-                document.getElementById('stars').innerText = score;
-            } else {
-                fb.className = "feedback wrong";
-                fb.innerText = "Грешка. Опитай 'Шоколад'.";
-            }
-        }
-    </script>
-</body>
-</html>
+        footer {
+            margin-top: 20px;
+            font
