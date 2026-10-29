@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>l-weaver-kids-academy | Вълшебно Обучение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #2F2E41;
+            --bg: #F7F9FC;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Comfortaa', cursive, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--dark);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+
+        .brand h1 {
+            font-size: 1.4rem;
+            color: var(--primary);
+        }
+
+        .brand p {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .score-box {
+            background: var(--accent);
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .mascot-card {
+            width: 100%;
+            max-width: 800px;
+            background: #E8F7F5;
+            border-left: 6px solid var(--secondary);
+            border-radius: 15px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .mascot-avatar {
+            font-size: 2.5rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            background: white;
+            color: var(--dark);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .module {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .module.active {
+            display: block;
+        }
+
+        .btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: transform 0.1s ease;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #EEE;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-top: 10px;
+            outline: none;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #D4EDDA;
+            color: #155724;
+            display: block;
+        }
+
+        .feedback.wrong {
+            background: #F8D7DA;
+            color: #721C24;
+            display: block;
+        }
+
+        footer {
+            margin-top: Auto;
+            padding-top: 30px;
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="brand">
+            <h1>🎓 L-Weaver Kids</h1>
+            <p>Академия за Вълшебно Обучение (1–4 клас)</p>
+        </div>
+        <div class="score-box">
+            ⭐ <span id="star-count">0</span> З
