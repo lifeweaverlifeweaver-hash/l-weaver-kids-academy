@@ -5,107 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L-Weaver Kids Academy</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #F7F9FC;
-            color: #2F2E41;
-            margin: 0;
-            padding: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            background: white;
-            padding: 18px;
-            border-radius: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            box-sizing: border-box;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 12px;
-            margin-bottom: 15px;
-        }
-        .score {
-            background: #FFE66D;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 16px;
-        }
-        .mascot-box {
-            background: #E8F7F5;
-            border-left: 5px solid #4ECDC4;
-            padding: 10px 14px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .nav {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .nav button {
-            padding: 10px 5px;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            background: #f8f9fa;
-            font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .nav button.active {
-            background: #FF6B6B;
-            color: white;
-            border-color: #FF6B6B;
-        }
-        .btn {
-            background: #4ECDC4;
-            color: white;
-            border: none;
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 12px;
-            font-weight: bold;
-        }
-        .btn-math { background: #FF6B6B; }
-        .btn-nature { background: #2ECC71; }
-        .btn-story { background: #9B59B6; }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            font-size: 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            margin-top: 8px;
-            box-sizing: border-box;
-        }
-        .module { display: none; }
-        .module.active { display: block; }
-        .feedback {
-            margin-top: 12px;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: bold;
-            display: none;
-        }
+        body { font-family: Arial, sans-serif; background: #F7F9FC; color: #2F2E41; padding: 15px; margin: 0; display: flex; justify-content: center; }
+        .box { width: 100%; max-width: 500px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        .score { background: #FFE66D; padding: 6px 12px; border-radius: 15px; font-weight: bold; }
+        .btn { background: #FF6B6B; color: white; border: none; padding: 12px; font-size: 16px; border-radius: 8px; width: 100%; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        input { width: 100%; padding: 10px; font-size: 16px; border: 2px solid #ddd; border-radius: 8px; margin-top: 10px; box-sizing: border-box; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 8px; font-weight: bold; display: none; }
         .correct { background: #D4EDDA; color: #155724; display: block; }
         .wrong { background: #F8D7DA; color: #721C24; display: block; }
-        footer {
-            margin-top: 20px;
-            font
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="header">
+            <h3 style="margin:0; color:#FF6B6B;">🎓 L-Weaver Kids</h3>
+            <div class="score">⭐ <span id="s">0</span></div>
+        </div>
+        <p style="font-weight:bold;">Колко е 3 + 4 ?</p>
+        <input type="number" id="ans" placeholder="Въведи отговор...">
+        <button class="btn" onclick="check()">Провери ✨</button>
+        <div id="fb" class="feedback"></div>
+    </div>
+
+    <script>
+        let sc = 0;
+        function check() {
+            let val = parseInt(document.getElementById('ans').value);
+            let fb = document.getElementById('fb');
+            if (val === 7) {
+                fb.className = "feedback correct";
+                fb.innerText = "Браво! +1 ⭐";
+                sc++;
+                document.getElementById('s').innerText = sc;
+            } else {
+                fb.className = "feedback wrong";
+                fb.innerText = "Опитай пак!";
+            }
+        }
+    </script>
+</body>
+</html>
